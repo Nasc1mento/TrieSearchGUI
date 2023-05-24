@@ -15,17 +15,21 @@ public class Tree <T> {
     }
 
     public void insert(String word) {
-        Node<T> currentNode = this.root;
-        for (int i = 0; i < word.length(); i++) {
-            char currentChar = word.charAt(i);
-            Node<T> child = currentNode.getChildren().get(currentChar);
-            if (child == null) {
-                child = new Node<>();
-                currentNode.getChildren().put(currentChar, child);
+        Map<Character, Node<T>> currentChildren = root.getChildren();
+        for (char c : word.toCharArray()) {
+            Node node;
+            if (currentChildren.containsKey(c)) {
+                node = currentChildren.get(c);
+            } else {
+                node = new Node();
+                currentChildren.put(c, node);
             }
-            currentNode = child;
+            currentChildren = node.getChildren();
+
+            if (c == word.charAt(word.length() - 1)) {
+                node.setEndOfWord(true);
+            }
         }
-        currentNode.setEndOfWord(true);
     }
 
     public boolean search(String word) {

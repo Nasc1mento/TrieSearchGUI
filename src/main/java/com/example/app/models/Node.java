@@ -7,7 +7,7 @@ public class Node <T> {
 
     private final Map<Character, Node<T>> children;
     private boolean isEndOfWord;
-    T value; // url pra mostrar no front
+    private T value; // url pra mostrar no front
 
     public Node() {
         this.children = new HashMap<>();
@@ -23,5 +23,13 @@ public class Node <T> {
 
     public void setEndOfWord(boolean isEndOfWord) {
         this.isEndOfWord = isEndOfWord;
+    }
+
+    public T getValue() {
+        return this.value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
     }
 }
