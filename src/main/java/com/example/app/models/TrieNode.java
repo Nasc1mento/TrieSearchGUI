@@ -1,23 +1,21 @@
 package com.example.app.models;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Node<T> {
+public class TrieNode<T> {
 
-    private final Map<Character, Node<T>> children;
+    private final Map<Character, TrieNode<T>> children;
     private boolean isEndOfWord;
-    private List<T> urls;
+    private LinkedList<String> urls;
 
-    public Node() {
+    public TrieNode() {
         this.children = new HashMap<>();
-        this.urls = new ArrayList<>();
+        this.urls = new LinkedList<>();
     }
 
-    public Map<Character, Node<T>> getChildren() {
+    public Map<Character, TrieNode<T>> getChildren() {
         return this.children;
     }
 
@@ -29,11 +27,11 @@ public class Node<T> {
         this.isEndOfWord = isEndOfWord;
     }
 
-    public List getValue() {
+    public LinkedList<String> getValue() {
         return this.urls;
     }
 
-    public void setValue(T value) {
+    public void setValue(String value) {
         this.urls.add(value);
     }
 }
