@@ -2,7 +2,6 @@ package com.example.app.models;
 
 public class LinkedListNode <T> {
 
-
     private T value;
     private LinkedListNode<T> next;
 
@@ -18,7 +17,6 @@ public class LinkedListNode <T> {
     public LinkedListNode<T> getNext() {
         return this.next;
     }
-
 
     public void setNext(LinkedListNode<T> next) {
         this.next = next;

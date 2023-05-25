@@ -4,12 +4,9 @@ public class LinkedList <T>{
 
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;
-    private int size;
 
     public LinkedList() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
+        this.head = tail = null;
     }
 
     public LinkedListNode<T> getHead() {
@@ -24,7 +21,6 @@ public class LinkedList <T>{
         }
         this.tail.setNext(newNode);
         this.tail = tail.getNext();
-        this.size++;
     }
 
     public boolean contains(T value) {
