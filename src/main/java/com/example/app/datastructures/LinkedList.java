@@ -1,20 +1,20 @@
-package com.example.app.models;
+package com.example.app.datastructures;
 
 public class LinkedList <T>{
 
-    private LinkedListNode<T> head;
-    private LinkedListNode<T> tail;
+    protected NodeLL<T> head;
+    protected NodeLL<T> tail;
 
     public LinkedList() {
         this.head = tail = null;
     }
 
-    public LinkedListNode<T> getHead() {
+    public NodeLL<T> getHead() {
         return this.head;
     }
 
     public void add(T value) {
-        LinkedListNode<T> newNode = new LinkedListNode<>(value);
+        NodeLL<T> newNode = new NodeLL<>(value);
         if (isEmpty()) {
             this.head = tail = newNode;
             return;
@@ -24,11 +24,11 @@ public class LinkedList <T>{
     }
 
     public boolean contains(T value) {
-        LinkedListNode<T> currentNode = this.head;
+        NodeLL<T> currentNode = this.head;
         while (currentNode != null) {
-            if (currentNode.getValue() == value) {
+            if (currentNode.getValue() == value)
                 return true;
-            }
+
             currentNode = currentNode.getNext();
         }
         return false;
@@ -36,5 +36,15 @@ public class LinkedList <T>{
 
     public boolean isEmpty() {
         return this.head == null;
+    }
+
+    public String list() {
+        NodeLL<T> currentNode = this.head;
+        StringBuilder result = new StringBuilder() ;
+        while (currentNode != null) {
+            result.append(currentNode.getValue()).append(" ");
+            currentNode = currentNode.getNext();
+        }
+        return result.toString();
     }
 }
