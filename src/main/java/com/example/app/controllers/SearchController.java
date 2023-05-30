@@ -1,6 +1,7 @@
 package com.example.app.controllers;
 
-import com.example.app.services.TreeService;
+import com.example.app.services.HTMLGeneratorService;
+import com.example.app.services.PopulateTreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,20 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SearchController {
 
-    private final TreeService treeService;
+    private final HTMLGeneratorService htmlGeneratorService;
 
     @Autowired
-    public SearchController(TreeService treeService) {
-        this.treeService = treeService;
+    public SearchController(HTMLGeneratorService htmlGeneratorService) {
+        this.htmlGeneratorService = htmlGeneratorService;
     }
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "param", defaultValue = " ") String param) {
-        return treeService.treeSearchAsList(param);
+        return htmlGeneratorService.treeSearchAsList(param);
     }
 
     @GetMapping("/table-tree")
     public String activateFunction() {
-        return treeService.treeAsTable();
+        return htmlGeneratorService.treeAsTable();
     }
 }
