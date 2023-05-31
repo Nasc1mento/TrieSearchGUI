@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Buscador</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+<h1>Buscador</h1>
+<form id="search-form">
+    <input name="param" id="param" type="text">
+    <button type="submit" id="search-button">Buscar</button>
+</form>
+<button onclick="treeAsTable()">Mostrar árvore</button>
+<div id="search-result-list"></div>
+<div id="tree-table"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const treeAsTable = () => {
+        $.ajax({
+            url: "/table-tree",
+            type: "GET",
+            success: function(response) {
+                $("#tree-table").html(response);
+            },
+            error: function(xhr, status, error) {
+               console.log(error);
+            }
+        });
+    }
+
+    document.getElementById("search-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        $.ajax({
+            url: "/search",
+            type: "GET",
+            data: {
+                param: $("#param").val()
+            },
+            success: function(response) {
+                $("#search-result-list").html(response);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+</html>
