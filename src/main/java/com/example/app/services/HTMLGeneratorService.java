@@ -43,13 +43,18 @@ public class HTMLGeneratorService {
         return sb.toString();
     }
 
-    private void treeAsTable(NodeTT node, String word, StringBuilder sb) {
-//        sb.append(word).append("\n");
-//        LinkedListTT children = node.getChildren();
-//        NodeLL<NodeTT> currentNode = children.getHead();
-//        while (currentNode != null) {
-//            treeAsTable(currentNode.getValue(), word + currentNode.getValue().getKey(), sb);
-//            currentNode = currentNode.getNext();
-//        }
-    }
+private void treeAsTable(NodeTT node, String word, StringBuilder sb) {
+    	String urlList = node.getUrls().list();
+    	sb.append("<tr><td> && ");
+    	sb.append("<td>"+ urlList);
+    	
+    	sb.append(word).append("\n");
+        LinkedListTT children = node.getChildren();
+        NodeLL<NodeTT> currentNode = children.getHead();
+        while (currentNode != null) {
+            treeAsTable(currentNode.getValue(), word + currentNode.getValue().getKey(), sb);
+            currentNode = currentNode.getNext();
+            sb.append("</td>");
+            sb.append("</tr></td>");
+        }
 }
