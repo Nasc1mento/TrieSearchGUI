@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+input {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 79%;
+    background: #f1f1f1;
+    border-radius: 50px;
+    margin-right: 1%;
+}
+
+button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background: #0b7dda;
+}
+
+form::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#search-result-list {
+    margin: 20px;
+}
+
+
+
