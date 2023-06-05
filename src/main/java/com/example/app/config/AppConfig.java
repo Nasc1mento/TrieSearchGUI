@@ -11,11 +11,7 @@ public class AppConfig {
     @Qualifier("urls")
     public String[] urls() {
         return new String[] {
-                "https://en.wikipedia.org/wiki/Trie",
-                "https://portal.ifpe.edu.br/campus/igarassu",
-                "https://globo.com",
-                "https://amazon.com",
-                "https://reddit.com",
+                "https://www.ifpe.edu.br/campus/igarassu",
         };
     }
 }
