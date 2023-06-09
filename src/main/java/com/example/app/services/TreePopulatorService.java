@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
 @Service
@@ -33,7 +34,8 @@ public class TreePopulatorService {
     public void initialize() {
         LinkedList<String> visited = new LinkedList<>();
         for (String url: this.urls) {
-            this.taskExecutor.execute(()-> performCrawl(0, url, visited));
+            String domain = this.extractDomain(url);
+            this.taskExecutor.execute(()-> performCrawl(0, url, domain, visited));
         }
     }
 
@@ -61,11 +63,12 @@ public class TreePopulatorService {
         return null;
     }
 
-    public void performCrawl(int level, String url, LinkedList<String> visited) {
+    public void performCrawl(int level, String url, String domain, LinkedList<String> visited) {
 
+        final int MAX_LEVEL = 5;
 
-        if (level <= 5) {
-            if (!this.isSameDomain(url, "www.ifpe.edu.br"))
+        if (level <= MAX_LEVEL) {
+            if (!this.extractDomain(url).equals(domain))
                 return;
             Document document = this.sendRequest(url, visited);
             if (document != null) {
@@ -75,7 +78,7 @@ public class TreePopulatorService {
                     String title = document.title();
                     this.addToTree(url, words, title);
                     if (!visited.contains(nextUrl))
-                        this.taskExecutor.execute(()->performCrawl(level + 1, nextUrl, visited));
+                        this.taskExecutor.execute(()->performCrawl(level + 1, nextUrl, domain, visited));
                 }
             }
         }
@@ -86,14 +89,12 @@ public class TreePopulatorService {
         return pattern.split(text);
     }
 
-    public boolean isSameDomain(String url, String domain) {
-        URI uri;
-        try {
-            uri = new URI(url);
-            String domainName = uri.getHost();
-            return domainName.equals(domain);
-        } catch (Exception e) {
-            return false;
+    public String extractDomain(String url) {
+        try{
+            URI uri = new URI(url);
+            return uri.getHost();
+        }catch(URISyntaxException e){
+           return null;
         }
     }
 }
