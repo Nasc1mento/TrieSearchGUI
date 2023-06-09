@@ -1,5 +1,6 @@
 package com.example.app.datastructures;
 
+import com.example.app.models.Site;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,20 +16,20 @@ public class TrieTree {
         return this.root;
     }
 
-    public void insert(String word, String url) {
+    public void insert(String word, String url, String title) {
         LinkedListTT currentChildren = root.getChildren();
 
         char[] wordArray = word.toCharArray();
-
+        Site site = new Site(url, title);
         for (int i = 0; i < wordArray.length; i++) {
             char c = wordArray[i];
             NodeTT node = currentChildren.get(c);
             if (node != null) {
-                if (!node.getUrls().contains(url))
-                    node.addUrl(url);
+                if (!node.getSiteList().contains(site))
+                    node.site(site);
             } else {
                 node = new NodeTT();
-                node.addUrl(url);
+                node.site(site);
                 currentChildren.put(c, node);
             }
             currentChildren = node.getChildren();
@@ -38,7 +39,7 @@ public class TrieTree {
         }
     }
 
-    public LinkedList<String> search(String word) {
+    public LinkedList<Site> search(String word) {
         LinkedListTT currentChildren = root.getChildren();
         NodeTT currentNode = null;
 
@@ -49,7 +50,7 @@ public class TrieTree {
             else
                 return null;
         }
-        return currentNode.getUrls();
+        return currentNode.getSiteList();
     }
 }
 

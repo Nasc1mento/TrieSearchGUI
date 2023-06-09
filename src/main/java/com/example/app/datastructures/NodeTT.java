@@ -1,16 +1,18 @@
 package com.example.app.datastructures;
 
 
+import com.example.app.models.Site;
+
 public class NodeTT {
 
     private final LinkedListTT children;
     private boolean isEndOfWord;
-    private final LinkedList<String> urls;
+    private final LinkedList<Site> siteList;
     private char key;
 
     public NodeTT() {
         this.children = new LinkedListTT();
-        this.urls = new LinkedList<>();
+        this.siteList = new LinkedList<>();
     }
 
     public LinkedListTT getChildren() {
@@ -25,12 +27,12 @@ public class NodeTT {
         return isEndOfWord;
     }
 
-    public LinkedList<String> getUrls() {
-        return this.urls;
+    public LinkedList<Site> getSiteList() {
+        return this.siteList;
     }
 
-    public void addUrl(String value) {
-        this.urls.add(value);
+    public void site(Site site) {
+        this.siteList.add(site);
     }
 
     public char getKey() {

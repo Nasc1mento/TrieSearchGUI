@@ -1,6 +1,7 @@
 package com.example.app.services;
 
 import com.example.app.datastructures.*;
+import com.example.app.models.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +15,26 @@ public class HTMLGeneratorService {
         this.tree = tree;
     }
 
-    public String treeSearchAsList(String param) {
-        LinkedList<String> searchResults = this.tree.search(param.toLowerCase());
+    public String treeSearchAsTable(String param) {
+        LinkedList<Site> searchResults = this.tree.search(param.toLowerCase());
         StringBuilder sb = new StringBuilder();
-        sb.append("<ul>");
+        sb.append("<table><thead><tr><th>Título</th><th>URL</th></tr></thead><tbody>");
         if (searchResults != null) {
-            NodeLL<String> current = searchResults.getHead();
+            NodeLL<Site> current = searchResults.getHead();
             while (current != null) {
-                sb.append("<li><a href='")
-                        .append(current.getValue())
-                        .append("'>").append(current.getValue())
-                        .append("</a></li>");
+                sb.append("<tr><td>")
+                    .append(current.getValue().getTitle())
+                    .append("</td>")
+                    .append("<td><a href='")
+                    .append(current.getValue().getUrl())
+                    .append("'>").append(current.getValue().getUrl())
+                    .append("</a></td></tr>");
                 current = current.getNext();
             }
         } else
-            sb.append("<li>Não encontramos nada</li>");
+            sb.append("<tr><td>Não encontramos nada</td><td>...</td></tr>");
 
-        sb.append("</ul>");
+        sb.append("</tbody></table>");
         return sb.toString();
     }
 
@@ -44,19 +48,23 @@ public class HTMLGeneratorService {
     }
 
     private void treeAsTable(NodeTT node, String word, StringBuilder sb) {
-        String[] urlList = node.getUrls().list().split(" ");
+        LinkedList<Site> siteList = node.getSiteList();
+        NodeLL<Site> currentSite= siteList.getHead();
         sb.append("<tr><td>")
             .append(word)
             .append("</td>")
             .append("<td>");
-        for (String url: urlList) {
+
+        while (currentSite != null) {
             sb.append("<a href='")
-                    .append(url)
-                    .append("'>")
-                    .append(url)
-                    .append("<br>")
-                    .append("</a>");
+                .append(currentSite.getValue().getUrl())
+                .append("'>")
+                .append(currentSite.getValue().getUrl())
+                .append("<br>")
+                .append("</a>");
+            currentSite = currentSite.getNext();
         }
+
 
         LinkedListTT children = node.getChildren();
         NodeLL<NodeTT> currentNode = children.getHead();

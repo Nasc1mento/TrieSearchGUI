@@ -18,11 +18,11 @@ public class SearchController {
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "param", defaultValue = " ") String param) {
-        return htmlGeneratorService.treeSearchAsList(param);
+        return htmlGeneratorService.treeSearchAsTable(param);
     }
 
     @GetMapping("/table-tree")
-    public String activateFunction() {
+    public String tableTree() {
         return htmlGeneratorService.treeAsTable();
     }
 }

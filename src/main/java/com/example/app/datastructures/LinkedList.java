@@ -26,7 +26,7 @@ public class LinkedList <T>{
     public boolean contains(T value) {
         NodeLL<T> currentNode = this.head;
         while (currentNode != null) {
-            if (currentNode.getValue() == value)
+            if (currentNode.getValue().equals(value))
                 return true;
 
             currentNode = currentNode.getNext();
@@ -36,15 +36,5 @@ public class LinkedList <T>{
 
     public boolean isEmpty() {
         return this.head == null;
-    }
-
-    public String list() {
-        NodeLL<T> currentNode = this.head;
-        StringBuilder result = new StringBuilder() ;
-        while (currentNode != null) {
-            result.append(currentNode.getValue()).append(" ");
-            currentNode = currentNode.getNext();
-        }
-        return result.toString();
     }
 }

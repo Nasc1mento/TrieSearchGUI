@@ -33,10 +33,10 @@ public class TreePopulatorService {
         }
     }
 
-    public void addToTree(String url, String[] words) {
+    public void addToTree(String url, String[] words, String title) {
         for (String word : words) {
             if (!word.isEmpty())
-                this.tree.insert(word.toLowerCase(), url);
+                this.tree.insert(word.toLowerCase(), url, title);
         }
     }
 
@@ -65,7 +65,8 @@ public class TreePopulatorService {
                 for (Element element : document.select("a[href]")) {
                     String nextUrl = element.absUrl("href");
                     String[] words = this.tokenizeText(document.text());
-                    this.addToTree(url, words);
+                    String title = document.title();
+                    this.addToTree(url, words, title);
                     if (!visited.contains(nextUrl))
                         this.performCrawl(level + 1, nextUrl, visited);
                 }
