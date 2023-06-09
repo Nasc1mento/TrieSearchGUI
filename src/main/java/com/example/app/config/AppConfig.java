@@ -20,7 +20,7 @@ public class AppConfig {
     }
 
     @Bean
-    @Qualifier("taskEexecutor")
+    @Qualifier("taskExecutor")
     public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
