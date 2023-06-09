@@ -1,5 +1,6 @@
 package com.example.app.config;
 
+import com.example.app.datastructures.TrieTree;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,12 @@ public class AppConfig {
     }
 
     @Bean
+    @Qualifier("trieTree")
+    public TrieTree trieTree() {
+        return new TrieTree();
+    }
+
+    @Bean
     @Qualifier("taskExecutor")
     public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -30,5 +37,6 @@ public class AppConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
     }
+
 
 }

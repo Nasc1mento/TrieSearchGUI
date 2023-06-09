@@ -1,4 +1,4 @@
-package com.example.app.services;
+package com.example.app.initializer;
 
 import com.example.app.datastructures.*;
 import jakarta.annotation.PostConstruct;
@@ -9,22 +9,22 @@ import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
-@Service
-public class TreePopulatorService {
+@Component
+public class TreePopulatorInitializer {
 
     private final TrieTree tree;
     private final String[] urls;
     private final ThreadPoolTaskExecutor taskExecutor;
 
     @Autowired
-    public TreePopulatorService(TrieTree tree, String[] urls, @Qualifier("taskExecutor") ThreadPoolTaskExecutor taskExecutor) {
+    public TreePopulatorInitializer(TrieTree tree, String[] urls, @Qualifier("taskExecutor") ThreadPoolTaskExecutor taskExecutor) {
         this.tree = tree;
         this.urls = urls;
         this.taskExecutor = taskExecutor;
@@ -66,9 +66,10 @@ public class TreePopulatorService {
     public void performCrawl(int level, String url, String domain, LinkedList<String> visited) {
 
         final int MAX_LEVEL = 5;
+        final String extractedDomain = this.extractDomain(url);
 
         if (level <= MAX_LEVEL) {
-            if (!this.extractDomain(url).equals(domain))
+            if (extractedDomain == null || !extractedDomain.equals(domain) || visited.contains(url))
                 return;
             Document document = this.sendRequest(url, visited);
             if (document != null) {

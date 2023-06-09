@@ -1,9 +1,7 @@
 package com.example.app.datastructures;
 
 import com.example.app.models.Site;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TrieTree {
 
     private final NodeTT root;
