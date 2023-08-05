@@ -6,7 +6,7 @@ Assessment 1 of the course Algorithms and Data Structures used the Trie tree to 
 
 ## Getting Started
 
-**You can easily run using an IDE like [Eclipse](https://www.eclipse.org/downloads/) and [Intellij IDEA](https://www.jetbrains.com/idea/download/)**, but if you don't want follow these steps below:
+**You can easily run using an IDE like [Eclipse](https://www.eclipse.org/downloads/) and [Intellij IDEA](https://www.jetbrains.com/idea/download/)**, but if you don't want to use them, you can run the application follwing the steps below:
 
 ** (**Considering you are in root folder of project**)
 
