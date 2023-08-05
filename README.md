@@ -13,7 +13,6 @@ Assessment 1 of the course Algorithms and Data Structures used the Trie tree to 
 ### Make sure you have installed:
 
 - open-jdk
-- open-jre
 - maven
 
 #### Clone project
@@ -87,4 +86,4 @@ Assessment 1 of the course Algorithms and Data Structures used the Trie tree to 
 
 [Waldyr Soares](https://github.com/waldyrssf)
 ## Licence
-[MIT]()
+[MIT](https://github.com/Nasc1mento/TrieSearchGUI/blob/main/LICENSE)
