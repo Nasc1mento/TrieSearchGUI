@@ -85,5 +85,5 @@ Assessment 1 of the course Algorithms and Data Structures used the Trie tree to 
 [Luana Germano](https://github.com/LuanaGerm4no)
 
 [Waldyr Soares](https://github.com/waldyrssf)
-## Licence
+## License
 [MIT](https://github.com/Nasc1mento/TrieSearchGUI/blob/main/LICENSE)
